@@ -95,6 +95,10 @@ async function refresh() {
   renderLabs(payload);
 }
 
+document.getElementById("token").addEventListener("input", () => {
+  loginError.hidden = true;
+});
+
 login.addEventListener("submit", async (event) => {
   event.preventDefault();
   loginError.hidden = true;
@@ -110,6 +114,8 @@ login.addEventListener("submit", async (event) => {
 
 logout.addEventListener("click", () => {
   sessionStorage.removeItem(TOKEN_KEY);
+  document.getElementById("token").value = "";
+  loginError.hidden = true;
   setSignedIn(false);
 });
 
