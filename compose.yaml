@@ -1,0 +1,22 @@
+# Local controller only (in-memory store). Not used by students.
+#
+#   ENROLLMENT_KEY=replace-me-class-enrollment-key \
+#   ADMIN_TOKEN=replace-me-admin-token \
+#   docker compose up --build
+#
+# Then open http://127.0.0.1:8080
+
+services:
+  controller:
+    build: ./controller
+    ports:
+      - "8080:8080"
+    environment:
+      STORE_BACKEND: memory
+      ENROLLMENT_KEY: ${ENROLLMENT_KEY:-replace-me-class-enrollment-key}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-replace-me-admin-token}
+      OFFLINE_AFTER_SEC: ${OFFLINE_AFTER_SEC:-120}
+      GCP_PROJECT: firewall-ai
+    env_file:
+      - path: .env
+        required: false
