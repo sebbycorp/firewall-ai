@@ -1,0 +1,56 @@
+# Local secrets and overrides — never commit these
+.env
+.env.*
+!.env.example
+!**/.env.example
+docker-compose.override.yml
+*.local
+*.local.*
+
+# GCP / gcloud credentials
+.gcloud/
+.cloudsdk/
+gcloud-config/
+application_default_credentials.json
+*-key.json
+*-keys.json
+*-credentials.json
+*credentials*.json
+service-account*.json
+sa-*.json
+gcp-*.json
+
+# Generic credential / key material
+credentials
+credentials*
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*.secret
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Build / test leftovers
+dist/
+build/
+*.egg-info/
+.tox/

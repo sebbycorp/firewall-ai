@@ -1,0 +1,28 @@
+# Run this compose file on a host that can reach the PA-VM management IP
+# AND can reach the Cloud Run controller on the public internet (HTTPS/443).
+#
+#   cp .env.example .env   # then edit — never commit .env
+#   docker compose up -d --build
+#
+# host networking is required on Linux so 172.16.x.x (etc.) is reachable
+# the same way the host sees the management LAN.
+
+services:
+  agent:
+    build: .
+    container_name: firewall-ai-agent
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      CONTROLLER_URL: ${CONTROLLER_URL:-https://YOUR-CLOUD-RUN-SERVICE-XXXX.a.run.app}
+      ENROLLMENT_KEY: ${ENROLLMENT_KEY:-replace-me-class-enrollment-key}
+      AGENT_TOKEN: ${AGENT_TOKEN:-}
+      STUDENT_ID: ${STUDENT_ID:-your.name@sheridancollege.ca}
+      FW_HOST: ${FW_HOST:-https://172.16.10.222}
+      FW_API_KEY: ${FW_API_KEY:-YOUR_PANOS_XML_API_KEY}
+      HEARTBEAT_INTERVAL_SEC: ${HEARTBEAT_INTERVAL_SEC:-30}
+      FW_VERIFY_TLS: ${FW_VERIFY_TLS:-false}
+      AGENT_ID: ${AGENT_ID:-}
+    network_mode: host

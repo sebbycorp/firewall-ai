@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Firewall AI — Lab status</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <p class="eyebrow">Sheridan lab controller</p>
+        <h1>Firewall AI</h1>
+      </div>
+      <div class="meta">
+        <span id="clock">—</span>
+        <span class="pill" id="count">0 labs</span>
+        <button type="button" id="logout" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <section id="gate" class="card">
+      <h2>Instructor sign-in</h2>
+      <p>Paste the class <code>ADMIN_TOKEN</code>. It stays in this browser tab only.</p>
+      <form id="login">
+        <label for="token">Admin token</label>
+        <input id="token" name="token" type="password" autocomplete="off" required />
+        <button type="submit">Open dashboard</button>
+      </form>
+      <p class="err" id="login-error" hidden></p>
+    </section>
+
+    <main id="dash" hidden>
+      <p class="hint">
+        Online means the agent heartbeated within the last
+        <span id="threshold">2 minutes</span>. Firewall API keys never leave the student PC.
+      </p>
+      <div class="table-wrap card">
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Status</th>
+              <th>Last seen</th>
+              <th>Hostname</th>
+              <th>PAN-OS</th>
+              <th>Mgmt IP</th>
+              <th>Last error</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="8" class="empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer>Firewall AI v{{ version }} · agent-proxy · no VPN</footer>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
